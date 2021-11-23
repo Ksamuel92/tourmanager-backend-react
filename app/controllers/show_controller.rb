@@ -12,5 +12,7 @@ class ShowController < ApplicationController
 
   private
 
-  def show_params; end
+  def show_params
+    params.require(:show).permit(:venue, :date, :loadin, :guarantee, :merch, :green_room, :wifi)
+  end
 end
