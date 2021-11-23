@@ -1,10 +1,16 @@
 class ShowController < ApplicationController
-  def create
+  def index
+    shows = Show.all
+    render json: shows
   end
 
-  def update
-  end
+  def create; end
 
-  def destroy
-  end
+  def update; end
+
+  def destroy; end
+
+  private
+
+  def show_params; end
 end
