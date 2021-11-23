@@ -1,4 +1,9 @@
 class ShowController < ApplicationController
+  def index
+    shows = Show.all
+    render json: shows
+  end
+
   def create
     show = Show.new(show_params)
     if show.save
@@ -20,7 +25,7 @@ class ShowController < ApplicationController
   def destroy
     show = show.find_by(params[:id])
     if show.destroy
-      head :no_content # Returns a response that has no content (merely headers). The options argument is interpreted to be a hash of header names and values.
+      head :no_content # Returns a response that has no content (merely headers)
     else
       render json: { error: show.errors.messages }, status: 422
     end

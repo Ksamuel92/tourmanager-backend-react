@@ -1,4 +1,9 @@
 class PromoterController < ApplicationController
+  def index
+    promoters = Promoter.all
+    render json: promoters
+  end
+
   def create
     promoter = Promoter.new(promoter_params)
     if promoter.save
