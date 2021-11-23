@@ -1,4 +1,4 @@
-class Promoter < ApplicationRecord\
+class Promoter < ApplicationRecord
   has_many :shows
   has_many :users, through: :shows
   before_create :slugify
@@ -7,8 +7,6 @@ class Promoter < ApplicationRecord\
     self.slug = name.parameterize
   end
 end
-
-
 # create_table "promoters", force: :cascade do |t|
 #   t.string "name"
 #   t.string "email"

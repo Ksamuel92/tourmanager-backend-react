@@ -2,12 +2,10 @@ class Show < ApplicationRecord
   belongs_to :user
   belongs_to :promoter
 
-
   def total_gross
-    self.merch + self.
+    merch + guarantee
   end
 end
-
 
 # create_table "shows", force: :cascade do |t|
 #   t.string "venue"
