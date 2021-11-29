@@ -7,10 +7,6 @@ class User < ApplicationRecord
          :jwt_authenticatable, jwt_revocation_strategy: self
   has_many :shows
   has_many :promoters, through: :shows
-
-  def jwt_payload
-    super.merge('foo' => 'bar')
-  end
 end
 
 # JTIMatcher
