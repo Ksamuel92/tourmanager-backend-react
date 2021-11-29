@@ -1,21 +1,21 @@
 class User < ApplicationRecord
+  include Devise::JWT::RevocationStrategies::JTIMatcher
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :jwt_authenticatable, :registerable, :recoverable, :rememberable, :validatable,
-         :omniauthable, jwt_revocation_strategy: JWTBlacklist
+  devise :database_authenticatable,
+         :jwt_authenticatable, jwt_revocation_strategy: self
   has_many :shows
   has_many :promoters, through: :shows
 end
-# \
 
-# create_table "users", force: :cascade do |t|
-#   t.string "email", default: "", null: false
-#   t.string "encrypted_password", default: "", null: false
-#   t.string "reset_password_token"
-#   t.datetime "reset_password_sent_at"
-#   t.datetime "remember_created_at"
-#   t.datetime "created_at", precision: 6, null: false
-#   t.datetime "updated_at", precision: 6, null: false
-#   t.index ["email"], name: "index_users_on_email", unique: true
-#   t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-# end
+# JTIMatcher
+# Here, the model class acts itself as the revocation strategy. It needs a new string column with name jti to be added to the user. jti stands for JWT ID, and it is a standard claim meant to uniquely identify a token.
+
+# It works like the following:
+
+# When a token is dispatched for a user, the jti claim is taken from the jti column in the model (which has been initialized when the record has been created).
+# At every authenticated action, the incoming token jti claim is matched against the jti column for that user. The authentication only succeeds if they are the same.
+# When the user requests to sign out its jti column changes, so that provided token won't be valid anymore.
+# In order to use it, you need to add the jti column to the user model. So, you have to set something like the following in a migration:
+
+# TODO:  may need to add jti_payload method to the user model
