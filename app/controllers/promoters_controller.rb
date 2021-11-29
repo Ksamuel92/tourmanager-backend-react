@@ -1,4 +1,6 @@
 class PromotersController < ApplicationController
+  # before_action :authenticate_user!
+
   def index
     promoters = Promoter.all
     render json: promoters
@@ -36,7 +38,7 @@ class PromotersController < ApplicationController
     if promoter.destroy
       head :no_content # Returns a response that has no content (merely headers). The options argument is interpreted to be a hash of header names and values.
     else
-      render json: { error: "Promoter not found" }, status: 404
+      render json: { error: 'Promoter not found' }, status: 404
     end
   end
 
