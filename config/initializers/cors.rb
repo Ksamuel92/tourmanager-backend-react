@@ -7,7 +7,7 @@
 # TODO Change this to final settings before deploying
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins 'example.com'
+    origins '*'
     resource '*',
              headers: :any,
              methods: %i[get post put patch delete options head],
