@@ -9,6 +9,8 @@ class ShowsController < ApplicationController
   def create
     # byebug
     show = Show.new(show_params)
+    show.wifi_network = params[:wifi_network]
+    show.wifi_password = params[:wifi_password]
     if show.save
       render json: show
     else
@@ -26,7 +28,10 @@ class ShowsController < ApplicationController
   end
 
   def update
+    # byebug
     show = Show.find_by(id: params[:id])
+    show.wifi_network = params[:wifi_network]
+    show.wifi_password = params[:wifi_password]
     if show.update(show_params)
       render json: show
     else
@@ -46,7 +51,7 @@ class ShowsController < ApplicationController
   private
 
   def show_params
-    params.require(:show).permit(:venue, :date, :loadin, :guarantee, :merch, :green_room, :user_id, :promoter_id,
+    params.require(:show).permit(:id, :venue, :date, :loadin, :guarantee, :merch, :green_room, :user_id, :promoter_id,
                                  :wifi_network, :wifi_password, promoter_attributes: %i[name email slug])
   end
 end
