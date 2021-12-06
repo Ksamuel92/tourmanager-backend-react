@@ -5,13 +5,14 @@ class Show < ApplicationRecord
 
   accepts_nested_attributes_for :promoter
   before_create :concat_wifi
+  before_update :concat_wifi
 
   def total_gross
     merch + guarantee
   end
 
   def concat_wifi
-    self.wifi = "Network: #{wifi_network}, Password: #{wifi_password}"
+    self.wifi = "Network: #{wifi_network} Password: #{wifi_password}"
   end
 end
 
