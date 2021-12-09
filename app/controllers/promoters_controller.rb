@@ -25,7 +25,6 @@ class PromotersController < ApplicationController
   end
 
   def update
-    byebug
     promoter = Promoter.find_by(id: params[:id])
     if promoter.update(promoter_params)
       render json: promoter
