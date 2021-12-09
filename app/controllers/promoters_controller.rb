@@ -1,8 +1,8 @@
 class PromotersController < ApplicationController
-  # before_action :authenticate_user!
+  before_action :authenticate_user!
 
   def index
-    promoters = Promoter.all
+    promoters = current_user.promoters
     render json: promoters
   end
 

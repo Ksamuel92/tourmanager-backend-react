@@ -1,8 +1,9 @@
 class ShowsController < ApplicationController
-  # before_action :authenticate_user!
+  before_action :authenticate_user!
 
   def index
-    shows = Show.all
+    # byebug
+    shows = current_user.shows
     render json: shows
   end
 
@@ -40,7 +41,7 @@ class ShowsController < ApplicationController
   end
 
   def destroy
-    show = show.find_by(id: params[:id])
+    show = Show.find_by(id: params[:id])
     if show.destroy
       head :no_content # Returns a response that has no content (merely headers)
     else
