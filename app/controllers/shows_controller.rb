@@ -29,10 +29,14 @@ class ShowsController < ApplicationController
   end
 
   def update
-    # byebug
     show = Show.find_by(id: params[:id])
+    promoter = Promoter.find_by(id: params[:promoter][:id])
+    promoter.name = params[:promoter][:name]
+    promoter.email = params[:promoter][:email]
+    promoter.save
     show.wifi_network = params[:wifi_network]
     show.wifi_password = params[:wifi_password]
+    byebug
     if show.update(show_params)
       render json: show
     else
@@ -52,7 +56,11 @@ class ShowsController < ApplicationController
   private
 
   def show_params
-    params.require(:show).permit(:id, :venue, :date, :loadin, :guarantee, :merch, :green_room, :user_id, :promoter_id,
+    params.require(:show).permit(:id, :venue, :date, :loadin, :guarantee, :merch, :green_room, :user_id, :promoter_id, :promoter,
                                  :wifi_network, :wifi_password, promoter_attributes: %i[name email slug])
+  end
+
+  def promoter_params
+    params.require(:promoter).permit(:name, :email)
   end
 end
