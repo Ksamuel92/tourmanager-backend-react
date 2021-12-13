@@ -25,10 +25,11 @@ ActiveRecord::Schema.define(version: 2021_11_29_181349) do
 
   create_table "shows", force: :cascade do |t|
     t.string "venue"
+    t.string "city"
     t.date "date"
     t.time "loadin"
-    t.decimal "guarantee"
-    t.decimal "merch"
+    t.integer "guarantee"
+    t.integer "merch"
     t.boolean "green_room"
     t.text "wifi"
     t.datetime "created_at", precision: 6, null: false
