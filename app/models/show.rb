@@ -6,6 +6,7 @@ class Show < ApplicationRecord
   accepts_nested_attributes_for :promoter
   before_create :concat_wifi
   before_update :concat_wifi
+  validates :venue, :date, presence: true
 
   def total_gross
     merch + guarantee
