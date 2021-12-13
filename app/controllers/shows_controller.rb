@@ -36,7 +36,6 @@ class ShowsController < ApplicationController
     promoter.save
     show.wifi_network = params[:wifi_network]
     show.wifi_password = params[:wifi_password]
-    byebug
     if show.update(show_params)
       render json: show
     else
@@ -56,8 +55,8 @@ class ShowsController < ApplicationController
   private
 
   def show_params
-    params.require(:show).permit(:id, :venue, :date, :loadin, :guarantee, :merch, :green_room, :user_id, :promoter_id, :promoter,
-                                 :wifi_network, :wifi_password, promoter_attributes: %i[name email slug])
+    params.require(:show).permit(:id, :venue, :date, :city, :loadin, :guarantee, :merch, :green_room, :user_id, :promoter_id, :promoter,
+                                 :wifi_network, :wifi_password, promoter_attributes: %i[id name email slug])
   end
 
   def promoter_params
