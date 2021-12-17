@@ -10,6 +10,7 @@ Before you continue, make sure you meet the following requirements:
 
 - Ruby 2.6.3
 - Rails 6.1.4
+- Postgresql 14 
 - Node.js 16.11.1 (for tourmanager-frontend)
 - Npm 8.1.1 (for tourmanager-frontend)
 
@@ -32,6 +33,15 @@ bundle install
 
 ```ruby
 rails db:create db:migrate db:seed
+```
+
+## Make a .env file and generate JWT secret for Devise
+
+```ruby
+rails secret
+*secret key*
+// in .env
+DEVISE_JWT_SECRET_KEY=*secret key*
 ```
 
 ### Run the server
