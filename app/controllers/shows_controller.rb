@@ -3,7 +3,7 @@ class ShowsController < ApplicationController
 
   def index
     # byebug
-    shows = current_user.shows
+    shows = current_user.shows.order(date: :asc)
     render json: shows
   end
 
