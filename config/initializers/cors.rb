@@ -10,6 +10,7 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
     origins 'https://tourmanager-frontend.herokuapp.com'
     resource '*',
              headers: :any,
+             credentials: true,
              methods: %i[get post put patch delete options head],
              expose: %w[Authorization],
              max_age: 600
