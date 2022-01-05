@@ -1,5 +1,5 @@
-class PromotersController < ApplicationController
-  before_action :authenticate_user!
+class Api::PromotersController < Api::BaseController
+  
 
   def index
     promoters = current_user.promoters

@@ -1,4 +1,4 @@
-class ShowsController < ApplicationController
+class Api::ShowsController < Api::BaseController
   before_action :authenticate_user!
 
   def index
