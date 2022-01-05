@@ -7,7 +7,7 @@
 # TODO Change this to final settings before deploying
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins 'https://tourmanagerapp.netlify.app/'
+    origins 'https://tourmanagerapp.netlify.app'
     resource '*',
              headers: :any,
              credentials: true,
