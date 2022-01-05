@@ -1,7 +1,14 @@
 # frozen_string_literal: true
 
 class Users::RegistrationsController < Devise::RegistrationsController
-  respond_to :json
+
+  def create
+    build_resource(sign_up_params)
+    resource.save
+    sign_up(resource_name, resource) if resource.persisted?
+
+    render_jsonapi_response(resource)
+  end
 
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
@@ -42,20 +49,20 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   private
 
-  def respond_with(resource, _opts = {})
-    if resource.persisted?
-      render json: {
-        status: { code: 200, message: 'Signed up sucessfully.' },
-        data: ActiveModelSerializers::SerializableResource.new(resource)
-      }
-    else
-      render json: {
-        status: { message: "User failed to be created. #{resource.errors.full_messages.to_sentence}" }
-      }, status: :unprocessable_entity
-    end
-  end
+  # def respond_with(resource, _opts = {})
+  #   if resource.persisted?
+  #     render json: {
+  #       status: { code: 200, message: 'Signed up sucessfully.' },
+  #       data: ActiveModelSerializers::SerializableResource.new(resource)
+  #     }
+  #   else
+  #     render json: {
+  #       status: { message: "User failed to be created. #{resource.errors.full_messages.to_sentence}" }
+  #     }, status: :unprocessable_entity
+  #   end
+  # end
 
-  # protected
+  # # protected
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params
