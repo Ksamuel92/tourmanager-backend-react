@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   get 'current_user', to: 'current_user#index'
   root "shows#index"
-  devise_for :users, path: '', path_names: {
+  devise_for :users, path_names: {
     sign_in: 'login',
     sign_out: 'logout',
     registration: 'signup'
